@@ -1,0 +1,107 @@
+<?php
+$this->headLink()->prependStylesheet('/skins/' . Zend_Registry::get('skinName') . '/' . $this->data->templateId . '.css', 'screen');
+$this->headLink()->prependStylesheet('/skins/' . Zend_Registry::get('skinName') . '/' . $this->data->templateColor . '.css', 'screen');
+?>
+
+<?php
+$this->headLink()->prependStylesheet('/skins/' . Zend_Registry::get('skinName') . '/templateTwo.css', 'screen'); ?>
+
+<div data-dojo-type="dijit/layout/BorderContainer" data-dojo-props="design: 'headline', gutters: 'false'" style="z-index: 0; margin: 0 auto; max-width: 1140px;">		
+			<?php
+			if(isset($this->data) && $this->data !== null) {
+			?>
+
+		
+		<?php 
+		$this->appSettings->showPageHeading = true;
+		if($this->appSettings->showPageHeading) {
+		?>
+			<div id="pageTitle">
+				<h2>
+					<?php 
+						echo ucwords($this->data->companyUri);
+					?>
+				</h2>
+			    <hr />
+			</div>
+			<div class="clear"></div>
+		<?php 
+		}
+		?>
+		<?php if (isset($this->data->topImage) && !empty($this->data->topImage)) { ?>
+		  <div id="main-img">
+		      <div id="overlay">
+		         <img src="<?php echo $this->baseUrl('/') . 'modules/getaways/' . $this->data->topImage; ?>" width="945" height="310" />
+		         <div id="overlay-info">
+		             <h5><?php echo $this->data->title . ' at ' . $this->data->companyUri; ?></h5>
+		             <a id="overlay-website" href="<?php echo $this->data->getawayUrl; ?>">Visit Their Website >></a>
+		         </div>
+		      </div>
+		  </div>
+		  <?php } ?>
+		<div id="pageContent">
+		  <div id="content">
+		  <h5><?php echo $this->data->title; ?></h5>
+		  
+		<?php
+		      if(isset($this->data->content) && !empty($this->data->content)) {
+                    echo $this->data->content;
+                    
+			     if($this->showFb) {
+			         //echo $this->faceBookHelper($this->fb, $fbTitle = $this->page['pageName'], $fbType = null, $fbUrl = null, $fbImage = null, $fbsiteName = null, $type = 'page');
+			     }
+			  }
+		?>
+		  </div>
+		  <div class="contentImages">
+		  <?php if (isset($this->data->leftImage) && !empty($this->data->leftImage)) { ?>
+		      <img src="<?php echo $this->baseUrl('/') . 'modules/getaways/' . $this->data->leftImage; ?>" />
+		  <?php } ?>
+		  <?php if (isset($this->data->rightImage) && !empty($this->data->rightImage)) { ?>
+		      <img src="<?php echo $this->baseUrl('/') . 'modules/getaways/' . $this->data->rightImage; ?>" />
+		  <?php } ?>
+		  <?php if (isset($this->data->bottomImage) && !empty($this->data->bottomImage)) { ?>
+		      <img src="<?php echo $this->baseUrl('/') . 'modules/getaways/' . $this->data->bottomImage; ?>" />
+		  <?php } ?>
+		</div>
+		<div id="sidebar">
+		    <div class="sidebar-header">
+		      <h3>ATTRACTION</h3>
+		    </div>
+		    <div class="sidebar-content">
+		    <div id="map_canvas" style="width:245px; height:245px"></div>
+<!-- 		      <img src="skins/fypg/images/map.png" width="245" height="245" /> -->
+		    </div>
+		    <div class="sidebar-header">
+		      <h3><?php echo $this->appSettings->sidebarLabelTwo; ?></h3>
+		    </div>
+		    <div class="sidebar-content">
+		      <p><?php echo $this->data->addrStreetOne; ?></p>
+		      <p><?php echo $this->data->addrStreetTwo; ?></p>
+		      <p><?php 
+		      if ( (isset($this->data->addrCity) && !empty($this->data->addrCity)) && (isset($this->data->addrState) && !empty($this->data->addrState)) ) {
+		          echo $this->data->addrCity . ', ' . $this->data->addrState; 
+		      } ?></p>
+		    </div>
+		    <div class="sidebar-header">
+		      <h3><?php echo $this->appSettings->sidebarLabelThree; ?></h3>
+		    </div>
+		    <div class="sidebar-content">
+		      <p><?php echo $this->data->getawayUrl; ?></p>
+		    </div>
+		    <div class="sidebar-header">
+		      <h3><?php echo $this->appSettings->sidebarLabelFour; ?></h3>
+		    </div>
+		    <div class="sidebar-content">
+		      <p><?php //echo $this->data->getawayUrl; ?></p>
+		    </div>
+		    <div class="sidebar-header">
+		      <h3><?php echo $this->appSettings->sidebarLabelFive; ?></h3>
+		    </div>
+		    <div class="sidebar-content">
+		      <p><?php //echo $this->data->getawayUrl; ?></p>
+		    </div>
+		</div>
+		</div>
+		<?php  } ?>
+</div>

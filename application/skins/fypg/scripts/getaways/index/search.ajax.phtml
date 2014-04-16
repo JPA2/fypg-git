@@ -1,0 +1,44 @@
+<div id="container">
+	<div id="ad-content">
+		<h2>Results:</h2>
+		<hr />
+		<?php 
+		if(isset($this->paginator)) {
+		    if(count($this->paginator)) {
+		
+		        foreach($this->paginator as $record) { 
+				?>
+				
+					<div class="whereto-results">
+						<div class="resultsbar">
+							<h2><a href="<?php echo $this->scheme.'://'.$this->host . $record->url; ?>"><?php echo $record->title; ?></a></h2>
+		    			</div>
+		    			<div class="grid1">
+		        			<img src="<?php echo $this->baseUrl('/'); ?>skins/<?php echo Zend_Registry::get('skinName'); ?>/images/thumbnail.png" alt="thumbnail" height="98" width="99" />
+		    			</div>
+		    			<div class="grid2">
+		        			<p><?php echo $record->summary; ?></p>
+		        		
+							<p class="readmore">
+								<a href="<?php echo $this->scheme .'://'.$this->host . $record->url; ?>">Read More...</a>
+							</p>
+		    			</div>
+					    <div class="grid3">
+					        <?php 
+					        if(isset($catIcon)) {
+					        ?>
+					        
+					        <?php 
+					        }
+					        ?>
+					    </div>
+					</div>
+		  <?php }
+		        
+		        echo $this->paginationControl($this->paginator, 'Sliding', 'search/search_pagination_control.phtml', $params = array('term' => $this->term));
+		    }
+		}
+		?>
+	</div>
+	<div id="skyscraper-ad"> <img src="/skins/fypg/images/ad-600x160.png" alt="ad" height="600" width="160"> </div>
+</div>

@@ -1,0 +1,100 @@
+<div id="container">
+	<div id="ad-content">
+		<h2>Events</h2>
+		<hr></hr>
+		<!-- <?php // $this->page->aContent; ?> -->
+
+		<div id="events-list">
+			
+			<?php 
+			echo $this->form;
+			?>
+		</div> <!-- end of events-list -->
+		
+		<hr></hr>
+		
+<!-- 		<h5>April 2012</h5> -->
+		
+		<?php 
+		//foreach($this->events as $event) {
+        ?>
+        <!--<div class="event-listing">-->
+			<!--<h4><?php //echo $event->title; ?></h4>-->
+			<!--<p><?php //echo $event->addrCity;?>, <?php //echo $event->addrState; ?></p>-->
+<!-- 			<p> -->
+			    <!--<span>--><?php //echo $event->startDate; ?> - <?php //echo $event->endDate; ?><!--<br /></span>-->
+<!-- 			</p> -->
+<!-- 			<p> -->
+			<?php 
+			//echo $event->eventContent;
+			?>
+<!-- 			</p> -->
+			
+<!-- 			<p class="moreinfo"><a href="#">More info <span>>></span></a></p> -->
+<!-- 			<hr></hr> -->
+		<!--</div>--> <!-- end of event-listing -->
+        <?php 
+        //}
+		?>
+<!-- 		<div class="event-listing"> -->
+<!-- 			<h4>Riverfest Music Festival</h4> -->
+<!-- 			<p>Vicksburg, Mississippi</p> -->
+<!-- 			<p>April 22-25</p> -->
+<!-- 			<p>Brief description of the event. Aenean convallis rutrum consectetur. Morbi interdum sodales est, ut laoreet odio aliquam eu. In hac habitasse platea dictumst. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam vehicula lacus magna.</p> -->
+<!-- 			<p class="moreinfo"><a href="#">More info <span>>></span></a></p> -->
+		<!--</div>--> <!-- end of event-listing -->
+		
+<!-- 		<div class="event-listing"> -->
+<!-- 			<h4>Riverfest Music Festival</h4> -->
+<!-- 			<p>Vicksburg, Mississippi</p> -->
+<!-- 			<p>April 22-25</p> -->
+<!-- 		<p class="moreinfo"><a href="#">More info <span>>></span></a></p> -->
+		<!--</div>--> <!-- end of event-listing -->
+		
+<!-- 		<div class="event-listing"> -->
+<!-- 			<h4>Riverfest Music Festival</h4> -->
+<!-- 			<p>Vicksburg, Mississippi</p> -->
+<!-- 			<p>April 22-25</p> -->
+<!-- 		<p class="moreinfo"><a href="#">More info <span>>></span></a></p> -->
+		<!--</div>--> <!-- end of event-listing -->
+		
+<!-- 		<div class="event-listing"> -->
+<!-- 			<h4>Riverfest Music Festival</h4> -->
+<!-- 			<p>Vicksburg, Mississippi</p> -->
+<!-- 			<p>April 22-25</p> -->
+<!-- 			<p>Brief description of the event. Aenean convallis rutrum consectetur. Morbi interdum sodales est, ut laoreet odio aliquam eu. In hac habitasse platea dictumst. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam vehicula lacus magna.</p> -->
+<!-- 		<p class="moreinfo"><a href="#">More info <span>>></span></a></p> -->
+		<!--</div>--> <!-- end of event-listing -->
+		
+
+<!-- 		<div id="pagination"> -->
+<!-- 			<a href="#">Next page</a> -->
+<!-- 			<a href="#">2</a> -->
+<!-- 			<a href="#">3</a> -->
+<!-- 			<a href="#">4</a> -->
+			
+		
+		<!--</div>--> <!-- end of pagination -->
+		
+			<?php
+	           if($this->data instanceof Zend_Paginator) {
+		          //Zend_Debug::dump($this->data);
+		          
+                    $this->partialLoop()->setObjectKey('model');
+
+                    echo $this->partialLoop('events/partials/event-item.phtml', $this->data);
+                    
+                    if($this->data->count() > 1) {
+                        echo $this->paginationControl($this->data,'Sliding','front-pagination-control.phtml', array('page' => $this->page));
+                    }
+
+	           }
+            ?>
+		
+			
+	</div> <!-- end of about-content -->
+	
+	<div id="skyscraper-ad"> <img src="skins/<?php echo Zend_Registry::get('skinName'); ?>/images/ad-skyscraper.jpg" alt="ad" height="600" width="160" /> </div>
+		
+
+</div> <!-- end of container -->

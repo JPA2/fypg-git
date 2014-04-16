@@ -1,0 +1,57 @@
+<?php 
+$catTable = new Getaways_Model_GetawaysCategories();
+$categories = $catTable->fetchCategoriesByGetaway($this->model->id);
+//Zend_Debug::dump($categories);
+$catsTable = new Getaways_Model_Categories();
+?>
+<div class="whereto-results">
+    <div class="resultsbar">
+    <?php 
+    //Zend_Debug::dump($this->model);
+    ?>
+        <h2><a href="<?php echo 'getaways/details/' . $this->model->id; ?>"><?php echo $this->model->title; ?></a></h2>
+        <h3></h3>
+    </div>
+    <div class="grid1">
+        <img src="<?php echo $this->baseUrl('/'); ?>skins/<?php echo Zend_Registry::get('skinName'); ?>/images/thumbnail.png" alt="thumbnail" height="98" width="99" />
+    </div>
+    <div class="grid2">
+        <p><?php echo $this->model->content; ?></p>
+        <div class="">
+        <?php 
+        foreach($categories as $cat) {
+
+            $getawayCatData = $catsTable->fetchGetawayCategoriesIcons($cat->categoryId);
+            //Zend_Debug::dump($getawayCatData->toArray()); 
+            foreach($getawayCatData as $icon) {
+                if($icon->parentId == 7) {
+                    $catIcon = $icon->icon;
+                }
+                
+                if($icon->parentId == 4) {
+        ?>
+                <div class="getaways">
+                <?php 
+                $iconDir = ($icon->parentId == 7) ? 'category' : 'interest';
+                
+                ?>
+                    <img src="<?php echo '/skins/'. Zend_Registry::get('skinName') . '/icons/' . $iconDir . '/' . $icon->icon;?>" />
+                </div>
+        <?php 
+                }
+            }
+        }
+        ?>
+        </div>
+        <p class="grid2"><a href="<?php echo $this->model->getawayUrl; ?>"><?php echo $this->model->getawayUrl; ?></a></p>
+    </div>
+    <div class="grid3">
+        <?php 
+        if(isset($catIcon)) {
+        ?>
+        <img src="/skins/fypg/icons/category/<?php echo $catIcon; ?>" alt="attraction" height="84" width="77" />
+        <?php 
+        }
+        ?>
+    </div>
+</div>

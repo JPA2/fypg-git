@@ -1,0 +1,40 @@
+<?php
+?>
+<div data-dojo-type="dijit/layout/BorderContainer" data-dojo-props="design: 'headline', gutters: 'false'" style="z-index: 0; margin: 0 auto; max-width: 980px;">		
+			<?php
+			if(isset($this->data) && $this->data !== null) {
+			?>
+
+		
+		<?php 
+		$this->appSettings->showPageHeading = true;
+		if($this->appSettings->showPageHeading) {
+		?>
+			<div id="pageTitle" style="margin-top: 50px;">
+				<h2>
+					<?php 
+						echo ucwords($this->data->title);
+					?>
+				</h2>
+			</div>
+			<hr />
+			<div class="clear"></div>
+		<?php 
+		}
+		?>
+		
+		<div id="skyscraper-ad"> <img src="skins/fypg/images/ad-skyscraper.jpg" alt="ad" height="600" width="160" /> </div>
+		
+		<div id="pageContent">
+		<?php
+		      if(isset($this->data->content) && !empty($this->data->content)) {
+                    echo $this->data->content;
+                    
+			     if($this->showFb) {
+			         //echo $this->faceBookHelper($this->fb, $fbTitle = $this->page['pageName'], $fbType = null, $fbUrl = null, $fbImage = null, $fbsiteName = null, $type = 'page');
+			     }
+			  }
+		} 
+		?>
+		</div>
+</div>

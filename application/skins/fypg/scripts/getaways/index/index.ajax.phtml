@@ -1,0 +1,45 @@
+<div id="container">
+	<div id="ad-content">
+		<h2>GETAWAYS</h2>
+		<hr></hr>
+
+			<p>Find your perfect getaway using our Where To tool. Here you can search based on location, category or interest to find that perfect getaway that youâ have been searching for. Click on a state below to browse for getaways in that state or use the dropdowns below to narrow your search based on category or interest.</p>
+			
+			<div id="whereto-dropdown" data-dojo-type="dijit/form/Form" data-dojo-props="method: 'POST', action: '/getaways/search'">
+				<h4 id="whereto-header">Where To</h4>
+				
+				<div data-dojo-type="dojo/store/Memory" data-dojo-id="states" data-dojo-props="data: [<?php echo $this->stateStore; ?>]"></div>
+				<input id="searchState" name="searchState" data-dojo-type="dijit/form/ComboBox" data-dojo-props="store:states, searchAttr:'name'" />
+				    		
+				<h4 id="cat-header">By Category</h4>
+				<div data-dojo-type="dojo/store/Memory" data-dojo-id="getawaycats" data-dojo-props="data: <?php  echo str_replace('"', "'", $this->catDropDownData); ?>"></div>
+				<input id="searchCat" name="searchCat" data-dojo-type="dijit/form/ComboBox" data-dojo-props="store:getawaycats, searchAttr:'value'" />
+				<input data-dojo-type="dijit/form/Button" data-dojo-props="label: 'Go'" type="submit">
+			
+			</div>
+			
+			<hr></hr>
+			
+			<h2>Search Results <!--for Alabama--></h2>
+			
+			<?php
+	           if($this->data instanceof Zend_Paginator) {
+		          //Zend_Debug::dump($this->data);
+		          
+                    $this->partialLoop()->setObjectKey('model');
+
+                    echo $this->partialLoop('getaways/partials/manage-getaways.phtml', $this->data);
+                    
+                    if($this->data->count() > 1) {
+                        echo $this->paginationControl($this->data, 'Sliding', 'front-pagination-control.phtml', array('page' => $this->page));
+                    }
+
+	           }
+            ?>
+	
+			
+	</div> <!-- end of about-content -->
+	
+	<div id="skyscraper-ad"> <img src="<?php echo $this->baseUrl('/'); ?>skins/<?php echo Zend_Registry::get('skinName'); ?>/images/ad-600x160.png" alt="ad" height="600" width="160" /> </div>		
+
+</div> <!-- end of container -->

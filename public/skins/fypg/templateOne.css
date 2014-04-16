@@ -1,0 +1,16 @@
+@CHARSET "UTF-8";
+
+#overlay-info {
+    height: 310px;
+    width: 250px;
+    position: absolute;
+    right: 0;
+}
+#pageContent .right {
+	float: right;
+}
+.sidebar-header {
+    width: 240px;
+    padding: 5px 0 5px 5px;
+    margin: 10px 0;
+}

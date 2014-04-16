@@ -1,0 +1,18 @@
+.loadingOverlay {
+    background:  #fff url('/lib/dojo/1.9/dijit/themes/claro/images/loadingAnimation.gif') no-repeat 10px 23px;
+    position: absolute;
+    z-index: 1001;
+    display: none;
+}
+ 
+.pageOverlay {
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+}
+ 
+.loadingMessage {
+    padding: 25px 40px;
+    color: #999;
+}

@@ -1,0 +1,216 @@
+<?php
+    if(isset($this->page) && $this->page !== null) {
+	   if($this->acl->isAllowed($this->user->role, $this->module, "$this->module.manage")) {
+?>
+				<div id="adminMenu" data-dojo-id="title" data-dojo-type="dijit/layout/ContentPane" data-dojo-props="region: 'top'">
+			        Admin tools
+					<a href="/admin/page/create">New</a>
+					<a href="/admin/page/edit/<?php echo $this->page->uri; ?>">Edit</a>
+					<?php
+					if(!$this->isHome) {
+					?>
+						<a href="/admin/page/delete/<?php echo $this->page->uri; ?>">Delete</a>
+					<?php
+					} 
+					?>
+					</div>
+					<?php 
+		}
+	    ?>
+
+		<?php 
+		$this->appSettings->showPageHeading = true;
+		if($this->appSettings->showPageHeading) {
+		?>
+<!-- 			<div data-dojo-id="pageTitle" data-dojo-type="dijit/layout/ContentPane" data-dojo-props="region: 'top', splitter: 'true'"> -->
+<!-- 				<h2> -->
+					<?php 
+// 						echo ucwords($this->page['pageName']); 
+// 					?>
+<!-- 				</h2> -->
+<!-- 			</div> -->
+		<?php 
+		}
+		?>
+		<div id="pageContent">
+    		<?php
+    			if($this->appSettings->showHomeTextContent)
+    			{
+    				echo $this->page->content;
+    			}
+    			if(isset($this->widgets)) {
+    		    	foreach($this->widgets as $widgetData) {
+    					echo $this->action($widgetData->action, $widgetData->controller, $widgetData->module);
+    				}
+    			}
+    			if($this->appSettings->showRecentImagesOnHome) {
+    	        //echo $this->action('recent', 'widget', 'media', array('mediaType' => 'images'));
+    	    	}
+    			if($this->showFb) {
+    			//echo $this->faceBookHelper($this->fb, $fbTitle = $this->page['pageName'], $fbType = null, $fbUrl = null, $fbImage = null, $fbsiteName = null, $type = 'page');
+    			}
+    		} 
+    		?>
+		
+		    <div id="skyscraper"> <img src="skins/<?php echo Zend_Registry::get('skinName'); ?>/images/ad-600x160.png" alt="ad" height="600" width="160" /> </div>
+		    <div id="divider"></div>
+			<div id="featured">
+			    <div id="featured-photo-bg"> <img src="skins/<?php echo Zend_Registry::get('skinName'); ?>/images/featured-photo.png" alt="featured" height="273" width="461" /> </div>
+			
+		        <div id="featured-copy">
+			        <h2><?php echo $this->appSettings->homeFeaturedTitle; ?></h2>
+			        <hr></hr>
+			        <h1>Our Top Ten Wedding Destinations</h1>
+			        <p class="date"> Posted by John Smith, May 11, 2012</p>
+			        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque nec augue purus. Vivamus mi felis, tincidunt nec fermentum a, varius et urna.</p>
+
+                    <p>Nullam nec erat eget dolor eleifend porta dignissim vel ipsum. Curabitur pulvinar mollis orci, a placerat urna lacinia nec. Suspendisse luctus tempus neque eget accumsan. Ut eget porta risus. Donec mi augue, pretium elementum eleifend at, gravida congue magna. 
+                    Nulla fermentum scelerisque cursus.</p> <p class="readmore">READ MORE...</p> 
+
+		
+			    </div> <!-- end of featured-copy -->
+			
+		   </div> <!-- end of featured -->
+	
+	       <div id="divider"></div>
+	
+		            <div id="events"> 
+            		<p class="subhead"><a href="/events"><?php echo $this->appSettings->homeEventsTitle; ?></a></p>
+            		<p class="viewcalendar"><a href="/events">view the full calendar</a></p>
+            		<p id="events-month" class="hed"><?php echo $this->date->get(Zend_Date::MONTH_NAME); ?></p>       			
+            			<?php echo $this->events(); ?>
+            	   </div> <!-- end of events -->
+		
+		<div id="mid-content">
+			<hr />
+			<div id="home-ad-mid"> <img src="skins/<?php echo Zend_Registry::get('skinName'); ?>/images/ad-300x250.png" alt="ad" height="250" width="300" /> </div> <!-- end of home-ad-mid -->
+					
+			<div class="mid-box">
+			<div id="mid-box-content1">
+				<p class="subhead"><a href="#"><?php echo $this->appSettings->homeDealsTitle; ?></a></p>
+				
+				<?php echo $this->deals(); ?>
+			
+			</div> <!-- end of mid-box-content1 -->
+			
+			<div id="divider2"></div>
+			
+			<div id="mid-box-content2">
+				<p class="subhead"><a href="#">HAVE YOU THOUGHT ABOUT?</a></p>
+					<p class="hed">Top Ten Reasons to Visit Little Rock</p>
+					<p class="sub">Read More</p>
+					
+					<p class="hed">LOUISIANA</p>
+					<p class="sub">Read More</p>
+			
+			</div> <!-- end of mid-box-content2 -->
+			</div>
+		
+	<hr />
+	
+		<div id="quickref">
+	<h2> QUICK REFERENCE GUIDE</h2>
+	
+		<div class="refbar">
+		
+			<div class="icon-first"> 
+				<a href="#"><img src="skins/fypg/images/icons/quickref-deals.png" alt="icon-deals" height="72" width="72" /></a>
+				<h3>DEALS</h3>
+				<p>View all our latest deals that our advertisers are offering up today!</p>
+				<p class="view"><a href="#">view deals</a></p>
+			</div> <!-- end of icon -->
+				
+			<div class="icon"> 
+				<a href="#"><img src="skins/fypg/images/icons/quickref-interests.png" alt="icon-interests" height="72" width="72" /></a>
+				<h3>INTERESTS</h3>
+				<p>View all our latest deals that our advertisers are offering up today!</p>
+				<p class="view"><a href="#">view points of interest</a></p>
+			</div> <!-- end of icon -->
+				
+			<div class="icon"> 
+				<a href="#"><img src="skins/fypg/images/icons/quickref-destinations.png" alt="icon-destinations" height="72" width="72" /></a>
+				<h3>DESTINATIONS</h3>
+				<p>View all our latest deals that our advertisers are offering up today!</p>
+				<p class="view"><a href="#">view destinations</a></p>
+			</div> <!-- end of icon -->
+			
+			<div class="icon"> 
+				<a href="#"><img src="skins/fypg/images/icons/quickref-attractions.png" alt="icon-attractions" height="72" width="72" /></a>
+				<h3>ATTRACTIONS</h3>
+				<p>View all our latest deals that our advertisers are offering up today!</p>
+				<p class="view"><a href="#">view attractions</a></p>
+			</div> <!-- end of icon -->
+			
+			<div class="icon long"> 
+				<a href="#"><img src="skins/fypg/images/icons/quickref-accommodations.png" alt="icon-accommodations" height="72" width="72" /></a>
+				<h3>ACCOMMODATIONS</h3>
+				<p>View all our latest deals that our advertisers are offering up today!</p>
+				<p class="view"><a href="#">view accommodations</a></p>
+			</div> <!-- end of icon -->
+			
+			<div class="icon"> 
+				<a href="#"><img src="skins/fypg/images/icons/quickref-events.png" alt="icon-events" height="72" width="72" /></a>
+				<h3>EVENTS</h3>
+				<p>View all our latest deals that our advertisers are offering up today!</p>
+				<p class="view"><a href="#">view events</a></p>
+			</div> <!-- end of icon -->
+		
+		</div> <!-- end of refbar -->
+		
+		
+		<div class="refbar">
+		
+			<div class="icon-first"> 
+				<a href="#"><img src="skins/fypg/images/icons/quickref-beaches.png" alt="icon-beaches" height="72" width="72" /></a>
+				<h3>BEACHES</h3>
+				<p>View all our latest deals that our advertisers are offering up today!</p>
+				<p class="view"><a href="#">view beaches</a></p>
+			</div> <!-- end of icon -->
+				
+			<div class="icon"> 
+				<a href="#"><img src="skins/fypg/images/icons/quickref-girlstrip.png" alt="icon-girls" height="72" width="72" /></a>
+				<h3>GIRLS TRIP</h3>
+				<p>View all our latest deals that our advertisers are offering up today!</p>
+				<p class="view"><a href="#">view girls trip</a></p>
+			</div> <!-- end of icon -->
+				
+			<div class="icon"> 
+				<a href="#"><img src="skins/fypg/images/icons/quickref-guystrip.png" alt="icon-guys" height="72" width="72" /></a>
+				<h3>GUYS TRIP</h3>
+				<p>View all our latest deals that our advertisers are offering up today!</p>
+				<p class="view"><a href="#">view guys trip</a></p>
+			</div> <!-- end of icon -->
+			
+			<div class="icon"> 
+				<a href="#"><img src="skins/fypg/images/icons/quickref-spas.png" alt="icon-spas" height="72" width="72" /></a>
+				<h3>SPAS</h3>
+				<p>View all our latest deals that our advertisers are offering up today!</p>
+				<p class="view"><a href="#">view spas</a></p>
+			</div> <!-- end of icon -->
+			
+			<div class="icon"> 
+				<a href="#"><img src="skins/fypg/images/icons/quickref-golf.png" alt="icon-golf" height="72" width="72" /></a>
+				<h3>GOLF</h3>
+				<p>View all our latest deals that our advertisers are offering up today!</p>
+				<p class="view"><a href="#">view golf</a></p>
+			</div> <!-- end of icon -->
+			
+			<div class="icon"> 
+				<a href="#"><img src="skins/fypg/images/icons/quickref-familyfun.png" alt="icon-family" height="72" width="72" /></a>
+				<h3>FAMILY FUN</h3>
+				<p>View all our latest deals that our advertisers are offering up today!</p>
+				<p class="view"><a href="#">view family fun</a></p>
+			</div> <!-- end of icon -->
+		
+		</div> <!-- end of refbar -->
+		
+		
+		
+	
+	</div> <!-- end of quickref -->
+	
+	</div> <!-- end of mid-content -->
+	
+	<hr></hr>
+		
+		</div>

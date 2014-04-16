@@ -1,0 +1,20 @@
+<div id="container">
+    <h2>Search Results:</h2>
+	<hr></hr>
+	<?php
+	if(isset($this->paginator)) 
+	{
+		
+		if($this->paginator instanceof Zend_Paginator) {
+		
+			$this->partialLoop()->setObjectKey('model');
+		
+			echo $this->partialLoop('events/partials/search-item.phtml', $this->paginator);
+		
+			if($this->paginator->count() > 1) {
+				echo $this->paginationControl($this->paginator,'Sliding','front-pagination-control.phtml', array('page' => $this->page));
+			}
+		}
+	}
+	?>
+</div>

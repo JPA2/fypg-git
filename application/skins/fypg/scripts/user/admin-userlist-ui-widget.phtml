@@ -1,0 +1,113 @@
+<?php
+$auth = Zend_Auth::getInstance();
+// Identity exists; get it
+$identity = $auth->getIdentity();
+$acl = new User_Acl_Acl();
+$role = new User_Acl_Role_User();
+$locations = $this->model->findDependentRowset('User_Model_Locations', 'Locations', $this->select);
+$primary = $locations->getPrimary();
+$companyName = (isset($this->model->companyName)) ? $this->model->companyName : $this->model->userName;
+
+?>
+
+<div id="userId_<?php echo $this->model->userId; ?>" data-dojo-type="dijit/layout/ContentPane" data-dojo-props="title: '<?php echo $companyName;?>'">
+    <div data-dojo-type="dijit/layout/BorderContainer" data-dojo-props="design: 'sidebar'" style="min-height: 550px;">
+            <div class="userDetails" data-dojo-type="dijit/layout/ContentPane" data-dojo-props="region:'left'">
+            <div class="userAvater">
+                <?php 
+                    echo $this->gravatar()->setEmail($this->model->email)->setDefaultImg(Zend_View_Helper_Gravatar::DEFAULT_MM);
+                ?>
+            </div>
+            <div class="userName">
+                <h6><?php echo $this->model->firstName; ?>&nbsp;<?php echo $this->model->lastName; ?></h6>
+                <h6><?php echo $this->model->email; ?></h6>
+                <h6><?php echo $this->model->companyName; ?></h6>
+                <?php 
+                    if($primary !== null) 
+                    { 
+                ?>
+                        <h6><?php echo $primary->addrStreetOne; ?></h6>
+                        <h6><?php echo $primary->addrStreetTwo; ?></h6>
+                        <h6><?php echo $primary->addrCity . ' ' . $primary->addrState; ?></h6>
+                        <h6><?php echo $primary->addrZip; ?></h6>
+                <?php 
+                    } 
+                ?>
+            </div>
+            <div class="userActions">
+                <?php 
+                    if ($acl->isAllowed($role, 'admin:area', 'admin:edit'))
+                    {
+                ?>
+                        <div><?php echo $this->button(str_replace(" ", "-", 'delete '.$this->model->userName), '/admin/user/delete/' . $this->model->userId. '/' . Zend_Registry::get('userListPage'), array('label' => 'Delete'), array('class' => 'adminUiButton', 'data-dojo-props' => 'iconClass: \'dijitIconDelete\'')); ?></div>
+                        <div data-dojo-type="dijit/form/DropDownButton" data-dojo-props="iconClass: 'dijitIconEditTask'" >
+                            <span>Edit</span>
+                            <div data-dojo-type="dijit/TooltipDialog">
+                               <?php
+                                    $form = Zend_Registry::get('editUser');  
+                                    $form->setAction($this->url(array('page' => Zend_Registry::get('userListPage')), 'admin_user_quickedit'));    
+                                    echo $form->populate($this->model->toArray());
+                               ?>
+                            </div>
+                        </div>
+                        <div><?php echo $this->button(str_replace(" ", "-", 'summarize '.$this->model->userName), '/user/account/summary/?uid=' . $this->model->userId, array('label' => 'Summary'), array('class' => 'adminUiButton')); ?></div>
+                <?php 
+                    }
+                ?>
+            </div>
+        </div>
+        <div data-dojo-type="dijit/layout/ContentPane" data-dojo-props="region:'center'">
+            <div class="userLocations">
+                <div data-dojo-type="dijit/TitlePane" data-dojo-props="title: 'General Admin', open: 'false'">
+                    <table>
+                        <tr>
+                            <td><?php echo $this->button('manage-getaways-' . $this->model->userId, '/admin/getaways/manage/' . $this->model->userId, array('label' => 'Manage All Getaways'), array('class' => 'adminUiButton')); ?></td>
+                            <td><?php echo $this->button('manage-events-' . $this->model->userId, '/admin/events/manage/' . $this->model->userId, array('label' => 'Manage All Events'), array('class' => 'adminUiButton')); ?></td>
+                            <td>
+                            <div data-dojo-type="dijit/form/DropDownButton" data-dojo-props="iconClass: 'dijitIconNewTask'">
+                                <span>Location</span>
+                                <div data-dojo-type="dijit/TooltipDialog">
+                                <?php 
+                                $this->url(array('userId' => $this->model->userId, 'page' => Zend_Registry::get('userListPage')), 'admin_add_location');
+                                ?>
+                                    <div class="ajaxForm" data-dojo-type="dijit/form/Form" data-dojo-props="method: 'POST', action: '<?php echo $this->url(array('userId' => $this->model->userId, 'page' => Zend_Registry::get('userListPage')), 'admin_add_location'); ?>'">
+                                        <input type="hidden" name="cmd" value="addLoc" />
+                                        <input type="hidden" name="userId" value="<?php echo $this->model->userId; ?>" />
+                                        <label for="addrStreetOne">Address 1:</label> <input data-dojo-type="dijit/form/TextBox" name="addrStreetOne" /><br />
+                                        <label for="addrStreetTwo">Address 2:</label> <input data-dojo-type="dijit/form/TextBox" name="addrStreetTwo" /><br />
+                                        <label for="addrCity">City:</label> <input data-dojo-type="dijit/form/TextBox" name="addrCity" /><br />
+                                        <label for="addrState">State:</label> <input data-dojo-type="dijit/form/TextBox" name="addrState" /><br />
+                                        <label for="addrZip">Zip Code:</label> <input data-dojo-type="dijit/form/TextBox" name="addrZip" /><br />
+                                        <input class="submitLoc" data-dojo-type="dijit/form/Button" data-dojo-props="label: 'Save'" type="submit">
+                                    </div>
+                                </div>
+                            </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <!-- start of location listing -->
+                <div id="locationAccordion_<?php echo $this->model->userId;?>" data-dojo-type="dijit/layout/AccordionContainer">
+            		<?php
+                        if(count($locations)) 
+                        {
+                            foreach($locations as $location) 
+                            {
+                                //Zend_Debug::dump($this->model)
+                                if (isset($location->addrCity) && !empty($location->addrCity))
+                                {
+                    ?>
+                                <div id="locationId_<?php echo $location->id;?>" style="height:200px;" data-dojo-type="dijit/layout/ContentPane" data-dojo-props="parseOnLoad: true, preload: false, title: '<?php echo $location->addrCity . ' ' . $location->addrState; ?>', href: '<?php echo $this->url(array('locationId' => (int)$location->id, 'format' => 'html', 'page' => Zend_Registry::get('userListPage')), 'admin_get_location');?>'" class="location">
+
+                                </div>
+                    <?php 
+                                }
+                            }
+                        }
+                    ?>
+                </div>
+                <!-- / end of location listing -->	
+    		</div> 
+        </div>
+    </div>
+</div>

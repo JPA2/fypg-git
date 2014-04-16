@@ -1,0 +1,24 @@
+<config>
+    <getaways>
+        <getaways-index>
+            <label>Getaways</label>
+            <uri>/getaways</uri>
+        </getaways-index>
+    </getaways>
+    <admin-getaways>
+        <admin-getaways-index>
+        	<label>Getaways</label>
+        	<uri><!-- /admin/getaways --></uri>
+        	<pages>
+        	    <manage-getaways>
+        	        <label>Over View</label>
+        			<uri>/admin/getaways/manage</uri>
+        	    </manage-getaways>
+        	    <create-getaways>
+        	        <label>Create Getaway</label>
+        			<uri>/admin/getaways/create</uri>
+        	    </create-getaways>
+        	</pages>
+        </admin-getaways-index>
+    </admin-getaways>
+</config>

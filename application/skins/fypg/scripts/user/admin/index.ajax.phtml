@@ -1,0 +1,52 @@
+<?php 
+$this->headScript()
+->prependScript(
+'
+require([
+  "aurora/admin/userManager"
+],
+function(uM){
+	uM.init();
+});', 
+$type = 'text/javascript');
+?>
+<?php 
+//Zend_Debug::dump(array('activeUserId' => $this->activeUserId, 'activeLocationId' => $this->activeLocationId));
+?>
+<?php 
+$this->headScript()
+->prependScript(
+'
+window.activeUserId = "'.$this->activeUserId.'";
+window.activeLocationId = "'.$this->activeLocationId.'";
+', 
+$type = 'text/javascript');
+?>
+<div id="userManager" data-dojo-type="dijit/layout/BorderContainer">
+    <div data-dojo-type="dijit/layout/ContentPane" data-dojo-props="region: 'top'">
+        <?php
+        echo $this->button(null, '/admin/user/create', array('label' => 'Create New User'), array('class' => 'adminUiButton'));
+
+        if ($this->paginator instanceof Zend_Paginator) {
+            
+        		$this->partialLoop()->setObjectKey('model');
+        		
+        		if($this->paginator->count() > 1) {
+        		    echo $this->paginationControl($this->paginator, 'Sliding', 'dojo-dropdown-pagination-control.phtml', array('page' => $this->page, 'select' => $this->select));
+        		} 
+        ?>
+        		
+     </div>
+     <div data-dojo-type="dijit/layout/ContentPane" data-dojo-props="region: 'center'">
+        		
+        		<div id="userAccordion" data-dojo-type="dijit/layout/AccordionContainer">
+        		  <?php
+        		      echo $this->partialLoop('user/admin-userlist-ui-widget.phtml', $this->paginator);
+        		  ?>
+        		</div> 
+        <?php
+        }
+        ?>
+    </div>
+</div>
+

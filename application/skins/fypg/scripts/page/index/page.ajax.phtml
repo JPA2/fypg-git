@@ -1,0 +1,54 @@
+<div data-dojo-type="dijit/layout/BorderContainer" data-dojo-props="design: 'headline', gutters: 'false'" style="z-index: 0; margin: 0 auto; max-width: 980px;">		
+			<?php
+			if(isset($this->page) && $this->page !== null) {
+				if($this->acl->isAllowed($this->user->role, 'page', "$this->module.manage")) {
+			?>
+			<div id="adminMenu" data-dojo-id="title" data-dojo-type="dijit/layout/ContentPane" data-dojo-props="region: 'top'">
+			Admin tools
+					<a href="/admin/page/create">New</a>
+					<a href="/admin/page/edit/<?php echo $this->page->uri; ?>">Edit</a>
+					<?php
+					if(!$this->isHome) {
+					?>
+						<a href="/admin/page/delete/<?php echo $this->page->uri; ?>">Delete</a>
+					<?php
+					}
+					?>
+					
+					</div>
+		    <?php 
+			}
+			?>
+		
+		<?php 
+		$this->appSettings->showPageHeading = true;
+		if($this->appSettings->showPageHeading) {
+		?>
+			<div id="pageTitle" style="margin-top: 50px;">
+				<h2>
+					<?php 
+						echo ucwords($this->page->label);
+					?>
+				</h2>
+			</div>
+			<hr />
+			<div class="clear"></div>
+		<?php 
+		}
+		?>
+		
+		<div id="skyscraper-ad"> <img src="skins/fypg/images/ad-skyscraper.jpg" alt="ad" height="600" width="160" /> </div>
+		
+		<div id="pageContent">
+		<?php
+		      if(isset($this->page->content) && !empty($this->page->content)) {
+                    echo $this->page->content;
+                    
+			     if($this->showFb) {
+			         //echo $this->faceBookHelper($this->fb, $fbTitle = $this->page['pageName'], $fbType = null, $fbUrl = null, $fbImage = null, $fbsiteName = null, $type = 'page');
+			     }
+			  }
+		} 
+		?>
+		</div>
+</div>

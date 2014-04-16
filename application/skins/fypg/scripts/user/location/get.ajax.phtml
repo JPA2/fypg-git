@@ -1,0 +1,50 @@
+<?php 
+//Zend_Debug::dump($this->location->toArray());
+//$this->location = null;
+//Zend_Debug::dump()
+if(isset($this->location) && ($this->location !== null) && ($this->location instanceof Zend_Db_Table_Row_Abstract))
+{
+?>
+
+    <div class="locations" style="height:100px;">
+        <p><?php echo $this->location->addrStreetOne; ?></p>
+        <p><?php echo $this->location->addrStreetTwo; ?></p>
+        <p><?php echo $this->location->addrCity . ' ' . $this->location->addrState; ?></p>
+        <p><?php echo $this->location->addrZip; ?></p>
+    </div>    
+    <?php 
+    //postLocation($userId, $formId = null, $step = '1', $action, $label, $method = 'POST',  Zend_Db_Table_Row_Abstract $addr)
+   // Zend_Debug::dump($location);
+    echo $this->postLocation($this->location->userId, 'new-getaway-'.$this->location->id, '1', '/admin/getaways/create', 'New Getaway', 'POST', $this->location);
+    
+    echo $this->postLocation($this->location->userId, 'new-event-'.$this->location->id, '1', '/admin/events/create', 'New Event', 'POST', $this->location);
+    ?>                 
+    <div data-dojo-type="dijit/form/DropDownButton" data-dojo-props="iconClass: 'dijitIconEditTask'">
+        <span>Location</span>
+        <div data-dojo-type="dijit/TooltipDialog">
+            <div class="ajaxForm" data-dojo-type="dijit/form/Form" data-dojo-props="method: 'POST', action: '/admin/user/update/location/<?php echo $this->location->id; ?>/<?php echo $this->page; ?>'">
+                
+                <input type="hidden" name="cmd" value="editLoc" />
+                <input type="hidden" name="locationId" value="<?php echo $this->location->id; ?>" />
+                <label for="addrStreetOne">Address 1:</label> <input data-dojo-type="dijit/form/TextBox" value="<?php echo $this->location->addrStreetOne; ?>" name="addrStreetOne" /><br />
+                <label for="addrStreetTwo">Address 2:</label> <input data-dojo-type="dijit/form/TextBox" value="<?php echo $this->location->addrStreetTwo; ?>" name="addrStreetTwo" /><br />
+                <label for="addrCity">City:</label> <input data-dojo-type="dijit/form/TextBox" value="<?php echo $this->location->addrCity; ?>" name="addrCity" /><br />
+                <label for="addrState">State:</label> <input data-dojo-type="dijit/form/TextBox" value="<?php echo $this->location->addrState; ?>" name="addrState" /><br />
+                <label for="addrZip">Zip Code:</label> <input data-dojo-type="dijit/form/TextBox" value="<?php echo $this->location->addrZip; ?>" name="addrZip" /><br />
+                <button class="submitLoc" data-dojo-type="dijit/form/Button" type="submit" name="submitButton">Submit</button>
+            </div>
+        </div>
+    </div>             
+    <?php 
+        if ($this->location->primary == false)
+        {
+    ?>
+            <div><?php 
+            echo $this->button('delete-location-' . $this->location->id, '/admin/location/delete/' . $this->location->id, array('label' => 'Location'), array('class' => 'adminUiButton', 'data-dojo-props' => 'iconClass: \'dijitIconDelete\'')); ?></div>                                          
+    <?php
+        }
+    ?>
+
+<?php 
+}
+?>

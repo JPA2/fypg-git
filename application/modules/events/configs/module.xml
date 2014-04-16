@@ -1,0 +1,24 @@
+<config>
+	<events>
+	    <event-index>
+	        <label>Events</label>
+	        <uri>/events</uri>
+	    </event-index>
+	</events>
+	<admin-events>
+	    <admin-events-index>
+	        <label>Manage Events</label>
+	        <uri>/admin/events</uri>
+	        <resource>resources.admin.events</resource>
+            <privilege>admin.manage.events</privilege>
+	        <pages>
+	            <create-event>
+	                <label>Create Event</label>
+	                <uri>/admin/events/create</uri>
+	                <resource>resources.admin.events</resource>
+	                <privilege>admin.manage.events</privilege>
+	            </create-event>
+	        </pages>
+	    </admin-events-index>
+	</admin-events>
+</config>

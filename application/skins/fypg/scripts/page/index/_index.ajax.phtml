@@ -1,0 +1,224 @@
+<div data-dojo-id="page" data-dojo-type="dijit/layout/ContentPane" data-dojo-props="region: 'top', splitter: 'false'">
+	<div data-dojo-type="dijit/layout/LayoutContainer" data-dojo-props="design: 'headline', gutters: 'false'" style="z-index: 0; width: 100%; height: 100%;">
+		<div data-dojo-id="title" data-dojo-type="dijit/layout/ContentPane" data-dojo-props="region: 'top', splitter: 'false'">
+			Admin tools
+			<?php
+			if(isset($this->page) && $this->page !== null) {
+				if($this->acl->isAllowed($this->user->role, $this->module, "$this->module.manage")) {
+			?>
+					<a href="/admin/pages/create">New</a>
+					<a href="/admin/pages/edit/<?php echo $this->page->uri; ?>">Edit</a>
+					<?php
+					if(!$this->isHome) {
+					?>
+						<a href="/admin/pages/delete/<?php echo $this->page->uri; ?>">Delete</a>
+					<?php
+					}
+			}
+			?>
+		</div>
+		<?php 
+		$this->appSettings->showPageHeading = true;
+		if($this->appSettings->showPageHeading) {
+		?>
+<!-- 			<div data-dojo-id="pageTitle" data-dojo-type="dijit/layout/ContentPane" data-dojo-props="region: 'top', splitter: 'true'"> -->
+<!-- 				<h2> -->
+					<?php 
+// 						echo ucwords($this->page['pageName']); 
+// 					?>
+<!-- 				</h2> -->
+<!-- 			</div> -->
+		<?php 
+		}
+		?>
+		<div id="top-content">
+		<div data-dojo-id="leftCol" data-dojo-type="dijit/layout/ContentPane" data-dojo-props="region: 'left', splitter: 'false'" style="width: 160px; min-height: 600px !important;">
+		  <div id="skyscraper"> <img src="skins/fypg/images/ad-600x160.png" alt="ad" height="600" width="160" /> </div>
+		</div>
+		<div data-dojo-id="pageContent" data-dojo-type="dijit/layout/ContentPane" data-dojo-props="region: 'center', splitter: 'false'">
+		  <h2>
+			 <?php 
+				echo ucwords($this->page->label); 
+			 ?>
+		  </h2>
+		<?php
+			if($this->appSettings->showHomeTextContent)
+			{
+				echo $this->page->content;
+			}
+			if(isset($this->widgets)) {
+		    	foreach($this->widgets as $widgetData) {
+					echo $this->action($widgetData->action, $widgetData->controller, $widgetData->module);
+				}
+			}
+			if($this->appSettings->showRecentImagesOnHome) {
+	        //echo $this->action('recent', 'widget', 'media', array('mediaType' => 'images'));
+	    	}
+			if($this->showFb) {
+			//echo $this->faceBookHelper($this->fb, $fbTitle = $this->page['pageName'], $fbType = null, $fbUrl = null, $fbImage = null, $fbsiteName = null, $type = 'page');
+			}
+		} 
+		?>
+		
+		
+		
+		<div id="mid-content">
+		
+		<div id="mid-box">
+			
+			<div id="mid-box-content1">
+				<p class="subhead"><a href="#">DEALS</a></p>
+					<p class="hed">Robert Trent Jones Golf Course 2 Night Stay</p>
+					<p class="sub">$150 package</p>
+					
+					<p class="hed">Gulf Shores, Alabama Family Getaway</p>
+					<p class="sub">$200 package</p>
+			
+			</div> <!-- end of mid-box-content1 -->
+			
+			<div id="divider2"></div>
+			
+			<div id="mid-box-content2">
+				<p class="subhead"><a href="#">HAVE YOU THOUGHT ABOUT?</a></p>
+					<p class="hed">Top Ten Reasons to Visit Little Rock</p>
+					<p class="sub">Read More</p>
+					
+					<p class="hed">LOUISIANA</p>
+					<p class="sub">Read More</p>
+			
+			</div> <!-- end of mid-box-content2 -->
+		
+		</div> <!-- end of mid-box -->
+		
+		<div id="home-ad-mid"> <img src="skins/fypg/images/ad-300x250.png" alt="ad" height="250" width="300" /> </div> <!-- end of home-ad-mid -->
+	
+	</div> <!-- end of mid-content -->
+	
+	<hr></hr>
+	
+	<div id="quickref">
+	<h2> QUICK REFERENCE GUIDE</h2>
+	
+		<div class="refbar">
+		
+			<div class="icon-first"> 
+				<a href="#"><img src="skins/fypg/images/icons/quickref-deals.png" alt="icon-deals" height="72" width="72" /></a>
+				<h3>DEALS</h3>
+				<p>View all our latest deals that our advertisers are offering up today!</p>
+				<p class="view"><a href="#">view deals</a></p>
+			</div> <!-- end of icon -->
+				
+			<div class="icon"> 
+				<a href="#"><img src="skins/fypg/images/icons/quickref-interests.png" alt="icon-interests" height="72" width="72" /></a>
+				<h3>INTERESTS</h3>
+				<p>View all our latest deals that our advertisers are offering up today!</p>
+				<p class="view"><a href="#">view points of interest</a></p>
+			</div> <!-- end of icon -->
+				
+			<div class="icon"> 
+				<a href="#"><img src="skins/fypg/images/icons/quickref-destinations.png" alt="icon-destinations" height="72" width="72" /></a>
+				<h3>DESTINATIONS</h3>
+				<p>View all our latest deals that our advertisers are offering up today!</p>
+				<p class="view"><a href="#">view destinations</a></p>
+			</div> <!-- end of icon -->
+			
+			<div class="icon"> 
+				<a href="#"><img src="skins/fypg/images/icons/quickref-attractions.png" alt="icon-attractions" height="72" width="72" /></a>
+				<h3>ATTRACTIONS</h3>
+				<p>View all our latest deals that our advertisers are offering up today!</p>
+				<p class="view"><a href="#">view attractions</a></p>
+			</div> <!-- end of icon -->
+			
+			<div class="icon long"> 
+				<a href="#"><img src="skins/fypg/images/icons/quickref-accommodations.png" alt="icon-accommodations" height="72" width="72" /></a>
+				<h3>ACCOMMODATIONS</h3>
+				<p>View all our latest deals that our advertisers are offering up today!</p>
+				<p class="view"><a href="#">view accommodations</a></p>
+			</div> <!-- end of icon -->
+			
+			<div class="icon"> 
+				<a href="#"><img src="skins/fypg/images/icons/quickref-events.png" alt="icon-events" height="72" width="72" /></a>
+				<h3>EVENTS</h3>
+				<p>View all our latest deals that our advertisers are offering up today!</p>
+				<p class="view"><a href="#">view events</a></p>
+			</div> <!-- end of icon -->
+		
+		</div> <!-- end of refbar -->
+		
+		
+		<div class="refbar">
+		
+			<div class="icon-first"> 
+				<a href="#"><img src="skins/fypg/images/icons/quickref-beaches.png" alt="icon-beaches" height="72" width="72" /></a>
+				<h3>BEACHES</h3>
+				<p>View all our latest deals that our advertisers are offering up today!</p>
+				<p class="view"><a href="#">view beaches</a></p>
+			</div> <!-- end of icon -->
+				
+			<div class="icon"> 
+				<a href="#"><img src="skins/fypg/images/icons/quickref-girlstrip.png" alt="icon-girls" height="72" width="72" /></a>
+				<h3>GIRLS TRIP</h3>
+				<p>View all our latest deals that our advertisers are offering up today!</p>
+				<p class="view"><a href="#">view girls trip</a></p>
+			</div> <!-- end of icon -->
+				
+			<div class="icon"> 
+				<a href="#"><img src="skins/fypg/images/icons/quickref-guystrip.png" alt="icon-guys" height="72" width="72" /></a>
+				<h3>GUYS TRIP</h3>
+				<p>View all our latest deals that our advertisers are offering up today!</p>
+				<p class="view"><a href="#">view guys trip</a></p>
+			</div> <!-- end of icon -->
+			
+			<div class="icon"> 
+				<a href="#"><img src="skins/fypg/images/icons/quickref-spas.png" alt="icon-spas" height="72" width="72" /></a>
+				<h3>SPAS</h3>
+				<p>View all our latest deals that our advertisers are offering up today!</p>
+				<p class="view"><a href="#">view spas</a></p>
+			</div> <!-- end of icon -->
+			
+			<div class="icon"> 
+				<a href="#"><img src="skins/fypg/images/icons/quickref-golf.png" alt="icon-golf" height="72" width="72" /></a>
+				<h3>GOLF</h3>
+				<p>View all our latest deals that our advertisers are offering up today!</p>
+				<p class="view"><a href="#">view golf</a></p>
+			</div> <!-- end of icon -->
+			
+			<div class="icon"> 
+				<a href="#"><img src="skins/fypg/images/icons/quickref-familyfun.png" alt="icon-family" height="72" width="72" /></a>
+				<h3>FAMILY FUN</h3>
+				<p>View all our latest deals that our advertisers are offering up today!</p>
+				<p class="view"><a href="#">view family fun</a></p>
+			</div> <!-- end of icon -->
+		
+		</div> <!-- end of refbar -->
+		
+		
+		
+	
+	</div> <!-- end of quickref -->
+		
+		
+		
+		
+		</div>
+		      <div data-dojo-id="rightCol" data-dojo-type="dijit/layout/ContentPane" data-dojo-props="region: 'right', splitter: 'false'" style="width: 300px; min-height: 577px !important;">
+            		<div id="events"> 
+            		<p class="subhead"><a href="#">EVENTS</a></p>
+            		<p class="viewcalendar"><a href="#">view the full calendar</a></p>
+            		<p class="hed">JULY</p>
+            			<ul>
+            				<li>July 4-8: Gulf Shores Music Festival</li>
+            				<li>July 16: Riverfest</li>
+            				<li>July 16: Riverfest</li>
+            				<li>July 16: Riverfest</li>
+            				<li>July 16: Riverfest</li>
+            				<li>July 16: Riverfest</li>
+            				<li>July 16: Riverfest</li>
+            				<li>July 16: Riverfest</li>
+            				<li>July 16: Riverfest</li>			
+            			</ul>
+            	   </div> <!-- end of events -->
+	       </div>	
+		</div><!-- end top-content -->
+	</div>
+</div>

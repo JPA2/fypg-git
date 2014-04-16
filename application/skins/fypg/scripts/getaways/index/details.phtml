@@ -1,0 +1,21 @@
+<?php
+
+switch($this->data->templateId) {
+    case 'templateOne':
+        echo $this->render('/getaways/index/templateOne.ajax.phtml');
+    break;
+    
+    case 'templateTwo':
+        echo $this->render('/getaways/index/templateTwo.ajax.phtml');
+    break;
+    
+    case 'templateThree':
+        echo $this->render('/getaways/index/templateThree.ajax.phtml');
+    break;
+    
+    default :
+        echo $this->render('/getaways/index/details.ajax.phtml');
+}
+
+//echo $this->render('/getaways/index/details.ajax.phtml');
+?>

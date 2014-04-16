@@ -1,0 +1,11 @@
+<config>
+    <admin-media>
+		<create-album>
+        	<label>Media Manager</label>
+          	<uri>/admin/media/managealbums</uri>
+           	<resource>media.albums</resource>
+          	<privilege>media.manage</privilege>
+          	<visible>false</visible>
+       	</create-album>
+    </admin-media>
+</config>

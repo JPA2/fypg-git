@@ -1,0 +1,16 @@
+<div id="container">
+    <h2>Event Details</h2>
+	<hr></hr>
+    <div class="event-listing">
+		<h4><?php echo $this->event->title; ?></h4>
+		<p><?php echo !empty($this->event->addrCity) ? $this->event->addrCity . ',' : '';?> <?php echo !empty($this->event->addrState) ? $this->event->addrState : ''; ?></p>
+		<p>
+		    <span><?php echo !empty($this->event->startDate) ? date('F j, Y', strtotime($this->event->startDate)) . ' - ' : ''; ?> <?php echo !empty($this->event->endDate) ? date('F j, Y', strtotime($this->event->endDate)) : ''; ?><br /></span>
+		</p>
+		<p>
+		<?php 
+		 echo $this->event->eventContent;
+		?>
+		</p>
+	</div> 
+</div>
