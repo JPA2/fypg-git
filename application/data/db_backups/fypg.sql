@@ -828,7 +828,7 @@ CREATE TABLE IF NOT EXISTS `skins` (
 INSERT INTO `skins` (`skinId`, `skinName`) VALUES
 (1, 'default'),
 (2, 'topquality'),
-(3, 'fypg')
+(3, 'fypg'),
 (4, 'catsitter');
 
 -- --------------------------------------------------------
