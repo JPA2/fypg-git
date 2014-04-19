@@ -809,18 +809,6 @@ INSERT INTO `session` (`id`, `modified`, `lifetime`, `data`) VALUES
 
 -- --------------------------------------------------------
 
---
--- Table structure for table `skins`
---
-
-CREATE TABLE IF NOT EXISTS `skins` (
-  `skinId` int(11) NOT NULL AUTO_INCREMENT,
-  `skinName` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`skinId`),
-  UNIQUE KEY `skinName` (`skinName`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
-
--- --------------------------------------------------------
 
 --
 -- Table structure for table `skins`
