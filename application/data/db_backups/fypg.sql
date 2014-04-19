@@ -820,14 +820,28 @@ CREATE TABLE IF NOT EXISTS `skins` (
   UNIQUE KEY `skinName` (`skinName`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `skins`
+--
+
+CREATE TABLE IF NOT EXISTS `skins` (
+  `skinId` int(11) NOT NULL AUTO_INCREMENT,
+  `skinName` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`skinId`),
+  UNIQUE KEY `skinName` (`skinName`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
+
 --
 -- Dumping data for table `skins`
 --
 
 INSERT INTO `skins` (`skinId`, `skinName`) VALUES
 (1, 'default'),
-(3, 'fypg'),
-(2, 'topquality');
+(2, 'topquality'),
+(3, 'fypg')
+(4, 'catsitter');
 
 -- --------------------------------------------------------
 
@@ -841,7 +855,7 @@ CREATE TABLE IF NOT EXISTS `skin_settings` (
   `spec` varchar(255) NOT NULL,
   `value` text NOT NULL,
   PRIMARY KEY (`recordId`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=10 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=13 ;
 
 --
 -- Dumping data for table `skin_settings`
@@ -856,10 +870,12 @@ INSERT INTO `skin_settings` (`recordId`, `skinId`, `spec`, `value`) VALUES
 (6, 2, 'isCurrentSkin', '0'),
 (7, 3, 'skinVersion', '1.1.0'),
 (8, 3, 'appVersion', '1.1.0'),
-(9, 3, 'isCurrentSkin', '1');
+(9, 3, 'isCurrentSkin', '0'),
+(10, 4, 'skinVersion', '1.1.0'),
+(11, 4, 'appVersion', '1.1.0'),
+(12, 4, 'isCurrentSkin', '1');
 
 -- --------------------------------------------------------
-
 --
 -- Table structure for table `slider`
 --
